@@ -1,0 +1,56 @@
+server {
+    listen ${PHP_HTTP_PORT} default_server;
+    listen [::]:${PHP_HTTP_PORT} default_server ipv6only=on;
+
+    root /opt/www/;
+    index ${PHP_INDEX};
+
+    location / {
+        satisfy any;
+
+        try_files ${ESCAPE}uri ${ESCAPE}uri/ /${PHP_INDEX}?${ESCAPE}args;
+    }
+
+    location ~ \.php${ESCAPE} {
+        try_files ${ESCAPE}uri =404;
+
+        fastcgi_index ${PHP_INDEX};
+        fastcgi_param SCRIPT_FILENAME ${ESCAPE}document_root${ESCAPE}fastcgi_script_name;
+        fastcgi_pass ${PHP_FPM_HOST}:${PHP_FPM_PORT};
+
+        include fastcgi_params;
+    }
+
+    error_log /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+}
+
+server {
+    listen ${PHP_HTTPS_PORT} ssl;
+    listen [::]:${PHP_HTTPS_PORT} ssl ipv6only=on;
+
+    root /opt/www/;
+    index ${PHP_INDEX};
+
+    ssl_certificate /etc/nginx/ssl.d/server.crt;
+    ssl_certificate_key /etc/nginx/ssl.d/server.key;
+
+    location / {
+        satisfy any;
+
+        try_files ${ESCAPE}uri ${ESCAPE}uri/ /${PHP_INDEX}?${ESCAPE}args;
+    }
+
+    location ~ \.php${ESCAPE} {
+        try_files ${ESCAPE}uri =404;
+
+        fastcgi_index ${PHP_INDEX};
+        fastcgi_param SCRIPT_FILENAME ${ESCAPE}document_root${ESCAPE}fastcgi_script_name;
+        fastcgi_pass ${PHP_FPM_HOST}:${PHP_FPM_PORT};
+
+        include fastcgi_params;
+    }
+
+    error_log /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+}
