@@ -4,6 +4,8 @@ MAINTAINER Elliot Wright <elliot@elliotwright.co>
 # Hacky way to prevent substitution of variables we don't want to substitute
 ENV ESCAPE="$"
 
+ENV NGINX_TEMPLATE default-php
+
 # Configuration substitutions
 ENV PHP_FPM_HOST php.docker
 ENV PHP_FPM_PORT 9000
@@ -19,5 +21,6 @@ RUN \
     openssl req -new -nodes -x509 -subj "/CN=*.docker.local/C=GB/ST=London/L=London/O=EWB" -days 3650 -keyout /etc/nginx/ssl.d/server.key -out /etc/nginx/ssl.d/server.crt -extensions v3_ca
 
 COPY ./templates/default-php.template /etc/nginx/templates.d/
+COPY ./templates/default-php-pimcore.template /etc/nginx/templates.d/
 
-CMD /bin/bash -c "envsubst < /etc/nginx/templates.d/default-php.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+CMD /bin/bash -c "envsubst < /etc/nginx/templates.d/${NGINX_TEMPLATE}.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
