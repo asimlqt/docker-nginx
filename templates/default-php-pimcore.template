@@ -31,8 +31,8 @@ server {
 }
 
 server {
-    listen ${PHP_HTTPS_PORT} ssl;
-    listen [::]:${PHP_HTTPS_PORT} ssl ipv6only=on;
+    listen ${PHP_HTTPS_PORT} ssl http2 default_server;
+    listen [::]:${PHP_HTTPS_PORT} ssl http2 default_server ipv6only=on;
 
     root /opt/www/;
     index ${PHP_INDEX};
