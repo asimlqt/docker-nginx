@@ -22,6 +22,7 @@ RUN \
 
 COPY ./templates/default-php.template /etc/nginx/templates.d/
 COPY ./templates/default-php-pimcore.template /etc/nginx/templates.d/
+COPY ./templates/default-php-pimcore-composer.template /etc/nginx/templates.d/
 COPY ./templates/default-php-symfony2.template /etc/nginx/templates.d/
 
 CMD /bin/bash -c "envsubst < /etc/nginx/templates.d/${NGINX_TEMPLATE}.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
