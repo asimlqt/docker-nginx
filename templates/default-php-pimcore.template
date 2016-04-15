@@ -3,7 +3,7 @@ server {
     listen [::]:${PHP_HTTP_PORT} default_server ipv6only=on;
 
     root /opt/www/;
-    index ${PHP_INDEX};
+    index ${PHP_INDEX} index.html index.htm;
 
     location ~* ^/website/var/assets {
         try_files ${ESCAPE}uri /${PHP_INDEX}?${ESCAPE}args;
@@ -35,7 +35,7 @@ server {
     listen [::]:${PHP_HTTPS_PORT} ssl http2 default_server ipv6only=on;
 
     root /opt/www/;
-    index ${PHP_INDEX};
+    index ${PHP_INDEX} index.html index.htm;
 
     ssl_certificate /etc/nginx/ssl.d/server.crt;
     ssl_certificate_key /etc/nginx/ssl.d/server.key;
