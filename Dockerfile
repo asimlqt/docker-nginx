@@ -1,4 +1,4 @@
-FROM nginx:1.9
+FROM nginx:1.10
 MAINTAINER Elliot Wright <elliot@elliotwright.co>
 
 # Hacky way to prevent substitution of variables we don't want to substitute
