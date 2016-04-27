@@ -2,7 +2,7 @@ server {
     listen ${PHP_HTTP_PORT} default_server;
     listen [::]:${PHP_HTTP_PORT} default_server ipv6only=on;
 
-    server_name_in_redirect off;
+    port_in_redirect off;
 
     root /opt/www/;
     index ${PHP_INDEX} index.html index.htm;
