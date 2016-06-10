@@ -3,6 +3,7 @@ server {
     listen [::]:${PHP_HTTP_PORT} default_server ipv6only=on;
 
     port_in_redirect off;
+    sendfile off;
 
     root /opt/www/web/;
     index ${PHP_INDEX} index.html index.htm;
@@ -32,6 +33,7 @@ server {
     listen [::]:${PHP_HTTPS_PORT} ssl http2 default_server ipv6only=on;
 
     port_in_redirect off;
+    sendfile off;
 
     root /opt/www/web/;
     index ${PHP_INDEX} index.html index.htm;
