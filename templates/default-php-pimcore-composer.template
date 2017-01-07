@@ -5,7 +5,7 @@ server {
     port_in_redirect off;
     sendfile off;
 
-    root /opt/www/web/;
+    root /opt/www/;
     index ${PHP_INDEX} index.html index.htm;
 
     location ~* ^/website/var/assets {
@@ -40,7 +40,7 @@ server {
     port_in_redirect off;
     sendfile off;
 
-    root /opt/www/web/;
+    root /opt/www/;
     index ${PHP_INDEX} index.html index.htm;
 
     ssl_certificate /etc/nginx/ssl.d/server.crt;
